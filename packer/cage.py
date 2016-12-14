@@ -21,6 +21,7 @@ class Cage:
         bounds.  Returns all unplaced products.
         """
         unplaced = []
+        self.x = 0
         for p in products:
             if self.x + p.width < Cage.width:
                 p.location = self.x, self.y, self.z
@@ -47,7 +48,9 @@ class Cage:
                 new_y = self.y + max(p.height for p in unplaced)
                 if new_z < self.length:
                     self.z = new_z
-                elif new_y < self.height:
+                else:
+                    self.z = 0
+                if new_y < self.height:
                     # Layer full, move to next layer
                     self.y = new_y
                 else:
